@@ -7,29 +7,31 @@
 /*jslint browser:true, todo: true*/
 /*global performance, chrome*/
 
-function onLoad() {
-    console.log("handler: onload");
+function reportTimelineEvent(type) {
     chrome.runtime.sendMessage({
         'type': 'timelineEvent',
         'data': {
             'ts': performance.now(),
-            'type': 'load',
+            'type': type,
             'location': JSON.stringify(location),
             'performance': JSON.stringify(performance.getEntries())
         }
     });
 }
 
+function onLoad() {
+    reportTimelineEvent('load');
+}
+
 function onUnload() {
-    console.log("handler: unload");
+    reportTimelineEvent('unload');
 }
 
 function bufferFull() {
-    console.log("handler: buffer is full");
+    reportTimelineEvent('timingBufferFull');
 }
 
 if (window.performance && performance.timing && chrome.runtime) {
-    console.log("xxx: able to register");
     // load event: with default run_at, browser chooses when to inject the script
     if (document.readyState === 'complete') {
         onLoad();
@@ -41,6 +43,5 @@ if (window.performance && performance.timing && chrome.runtime) {
     window.addEventListener('unload', onUnload);
 
     // performance resource timing buffer is full
-    console.log("register full buffer handler");
     performance.onresourcetimingbufferfull = bufferFull;
 }
