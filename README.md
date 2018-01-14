@@ -15,15 +15,19 @@ Window events
 
 * page load
 
-* page unload
+* page unload (before unload)
 
-* hash change
+* hash change (part after the #)
 
 * history pop state
 
 Performance timing events
 
 * resource timing buffer is full
+
+Heuristically detected
+
+* URL change
 
 Browser properties are dumped on next events:
 

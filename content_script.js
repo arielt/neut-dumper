@@ -7,6 +7,9 @@
 /*jslint browser:true, todo: true*/
 /*global performance, chrome*/
 
+// current URL
+var currentPage = window.location.href;
+
 function reportTimelineEvent(type) {
     chrome.runtime.sendMessage({
         'type': 'timelineEvent',
@@ -33,9 +36,8 @@ if (window.performance && performance.timing && chrome.runtime) {
         });
     }
 
-    // unload event
-    window.addEventListener('unload', function () {
-        reportTimelineEvent('unload');
+    window.addEventListener('beforeunload', function () {
+        reportTimelineEvent('beforeunload');
     });
 
     window.addEventListener('hashchange', function () {
@@ -48,4 +50,12 @@ if (window.performance && performance.timing && chrome.runtime) {
 
     // performance resource timing buffer is full
     performance.onresourcetimingbufferfull = bufferFull;
+
+    // listen for URL changes
+    setInterval(function () {
+        if (currentPage !== window.location.href) {
+            currentPage = window.location.href;
+            reportTimelineEvent('urlChange');
+        }
+    }, 500);
 }
