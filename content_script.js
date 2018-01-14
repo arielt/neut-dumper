@@ -1,8 +1,6 @@
 /**
  * Content script to be injected to the loaded page. Runs with default run_at
  * parameter: https://developer.chrome.com/extensions/content_scripts.
- * Timing API: https://www.w3.org/TR/navigation-timing.
- * All page information, including URLs has to be collected by content script.
  */
 
 "use strict";
@@ -11,6 +9,15 @@
 
 function onLoad() {
     console.log("handler: onload");
+    chrome.runtime.sendMessage({
+        'type': 'timelineEvent',
+        'data': {
+            'ts': performance.now(),
+            'type': 'load',
+            'location': JSON.stringify(location),
+            'performance': JSON.stringify(performance.getEntries())
+        }
+    });
 }
 
 function onUnload() {
