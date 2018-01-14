@@ -1,0 +1,3 @@
+#!/bin/bash
+
+jsLint content_script.js

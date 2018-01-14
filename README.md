@@ -5,19 +5,17 @@ data can be inspected in IndexedDB or exported to file.
 
 ## Collected data
 
-* browser properties
-
 * performance dumps
 
-## Triggers
+* browser properties
+
+## Tracked events
 
 Performance dumps are performed on next events:
 
 * page load
 
 * page unload
-
-* url is about to change
 
 * resource timing buffer is full
 
@@ -35,6 +33,11 @@ Clone the repo and install neut-dump as extension. Supported browsers:
 
 * Chrome
 
-## Inspect data
+## Database structure
+
+All data is stored in single database 'neut-dump'. Time series data is going into
+'timeline' object store.
+
+Each record in timeline has a timestamp, event name and event data.
 
 ## Export data
