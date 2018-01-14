@@ -11,11 +11,17 @@ data can be inspected in IndexedDB or exported to file.
 
 ## Tracked events
 
-Performance dumps are performed on next events:
+Window events
 
 * page load
 
 * page unload
+
+* hash change
+
+* history pop state
+
+Performance timing events
 
 * resource timing buffer is full
 
