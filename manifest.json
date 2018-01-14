@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "Neut Dumper",
+    "description": "Raw performance data dumper",
+    "version": "0.1",
+    "icons": {
+        "128": "nd.png"
+    },
+    "background": {
+        "scripts": ["background_page.js"]
+    },
+    "content_scripts": [{
+      "matches": ["*://*/*"],
+      "js": ["content_script.js"]
+    }],
+    "browser_action": {
+        "default_icon": "nd.png",
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "storage"
+    ]
+}
