@@ -35,7 +35,7 @@ function addItemToDbTimeline(item) {
         request = store.add(item);
 
     request.onerror = function (e) {
-        console.err('Error', e.target.error.name);
+        console.error('Error', e.target.error.name);
     };
     /*
     request.onsuccess = function (e) {
@@ -48,7 +48,7 @@ function downloadDb() {
         objectStore = transaction.objectStore(STORE);
 
     if (objectStore.getAll === undefined) {
-        console.err("Object store has no getAll method");
+        console.error("Object store has no getAll method");
         return;
     }
 

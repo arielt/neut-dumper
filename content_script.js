@@ -15,8 +15,9 @@ function reportTimelineEvent(type) {
         'type': 'timelineEvent',
         'data': {
             'type': type,
-            'location': location,
-            'performance': performance.getEntries()
+            // This is required for firefox only, it can't send plain object
+            'location': JSON.stringify(location),
+            'performance': JSON.stringify(performance.getEntries())
         }
     });
 }
