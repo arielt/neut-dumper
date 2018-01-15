@@ -14,7 +14,7 @@ function reportTimelineEvent(type) {
     chrome.runtime.sendMessage({
         'type': 'timelineEvent',
         'data': {
-            'ts': performance.now(),
+            'ts':  null, // to be timestamped when inserting into database
             'type': type,
             'location': JSON.stringify(location),
             'performance': JSON.stringify(performance.getEntries())
