@@ -54,8 +54,9 @@ chrome.runtime.onMessage.addListener(
             msg.data.windowId = sender.tab.windowId;
             addItemToDbTimeline(msg.data);
             break;
-        case 'popupCleanupDatabase':
-        case 'popupExportDatabase':
+        case 'download':
+            break;
+        case 'clear':
             break;
         }
     }

@@ -2,3 +2,4 @@
 
 jsLint content_script.js
 jsLint background_page.js
+jsLint popup.js
