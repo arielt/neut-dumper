@@ -15,8 +15,8 @@ function reportTimelineEvent(type) {
         'type': 'timelineEvent',
         'data': {
             'type': type,
-            'location': JSON.stringify(location),
-            'performance': JSON.stringify(performance.getEntries())
+            'location': location,
+            'performance': performance.getEntries()
         }
     });
 }

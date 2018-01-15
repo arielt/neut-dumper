@@ -53,7 +53,7 @@ function downloadDb() {
     }
 
     objectStore.getAll().onsuccess = function (event) {
-        var blob = new Blob([JSON.stringify(event.target.result)], {type : 'application/json'}),
+        var blob = new Blob([JSON.stringify(event.target.result, null, 2)], {type : 'application/json'}),
             url = URL.createObjectURL(blob);
         chrome.downloads.download({
             url: url,
