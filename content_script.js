@@ -14,7 +14,6 @@ function reportTimelineEvent(type) {
     chrome.runtime.sendMessage({
         'type': 'timelineEvent',
         'data': {
-            'ts':  null, // to be timestamped when inserting into database
             'type': type,
             'location': JSON.stringify(location),
             'performance': JSON.stringify(performance.getEntries())
@@ -40,6 +39,7 @@ if (window.performance && performance.timing && chrome.runtime) {
         reportTimelineEvent('beforeunload');
     });
 
+   /*
     window.addEventListener('hashchange', function () {
         reportTimelineEvent('hashchange');
     });
@@ -47,6 +47,7 @@ if (window.performance && performance.timing && chrome.runtime) {
     window.addEventListener('popstate', function () {
         reportTimelineEvent('popstate');
     });
+    */
 
     // performance resource timing buffer is full
     performance.onresourcetimingbufferfull = bufferFull;

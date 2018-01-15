@@ -17,15 +17,15 @@ Window events
 
 * page unload (before unload)
 
-* hash change (part after the #)
+* hash change (part after the #) [replaced with URL change]
 
-* history pop state
+* history pop state [replaced with URL change]
 
 Performance timing events
 
 * resource timing buffer is full
 
-Heuristically detected
+Detected
 
 * URL change
 

@@ -48,11 +48,10 @@ chrome.runtime.onMessage.addListener(
     function (msg, sender, sendResponse) {
         switch (msg.type) {
         case 'timelineEvent':
-            // timeline event sent by content script
-            console.log("xxx: timelineEvent");
-            console.log(msg.data);
-            // timestamp the data
+            // timestamp the data, add window and tab IDs
             msg.data.ts = Date.now();
+            msg.data.tabId = sender.tab.id;
+            msg.data.windowId = sender.tab.windowId;
             addItemToDbTimeline(msg.data);
             break;
         case 'popupCleanupDatabase':
@@ -62,6 +61,3 @@ chrome.runtime.onMessage.addListener(
     }
 );
 /*jslint unparam: false*/
-
-// load background page
-console.log("xxx: loading background page");
