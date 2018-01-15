@@ -1,6 +1,6 @@
 "use strict";
 /*jslint browser:true, todo: true*/
-/*global chrome, indexedDB*/
+/*global chrome, indexedDB, URL, Blob*/
 
 var DB_VERSION = 1;
 var DB_NAME = 'neut-dumper';
@@ -35,10 +35,30 @@ function addItemToDbTimeline(item) {
         request = store.add(item);
 
     request.onerror = function (e) {
-        console.log('Error', e.target.error.name);
+        console.err('Error', e.target.error.name);
     };
+    /*
     request.onsuccess = function (e) {
-        console.log('Woot! Did it' + e);
+    };
+    */
+}
+
+function downloadDb() {
+    var transaction = db.transaction(STORE, 'readonly'),
+        objectStore = transaction.objectStore(STORE);
+
+    if (objectStore.getAll === undefined) {
+        console.err("Object store has no getAll method");
+        return;
+    }
+
+    objectStore.getAll().onsuccess = function (event) {
+        var blob = new Blob([JSON.stringify(event.target.result)], {type : 'application/json'}),
+            url = URL.createObjectURL(blob);
+        chrome.downloads.download({
+            url: url,
+            filename: 'neut-dump-timeseries.json'
+        });
     };
 }
 
@@ -55,6 +75,7 @@ chrome.runtime.onMessage.addListener(
             addItemToDbTimeline(msg.data);
             break;
         case 'download':
+            downloadDb();
             break;
         case 'clear':
             break;
