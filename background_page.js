@@ -62,6 +62,12 @@ function downloadDb() {
     };
 }
 
+function clearDb() {
+    var transaction = db.transaction(STORE, 'readwrite'),
+        objectStore = transaction.objectStore(STORE);
+    objectStore.clear();
+}
+
 // handling messages both from content script and extension popup
 /*jslint unparam: true*/
 chrome.runtime.onMessage.addListener(
@@ -78,6 +84,7 @@ chrome.runtime.onMessage.addListener(
             downloadDb();
             break;
         case 'clear':
+            clearDb();
             break;
         }
     }
