@@ -78,6 +78,8 @@ chrome.runtime.onMessage.addListener(
             msg.data.ts = Date.now();
             msg.data.tabId = sender.tab.id;
             msg.data.windowId = sender.tab.windowId;
+            msg.data.location = JSON.parse(msg.data.location);
+            msg.data.performance = JSON.parse(msg.data.performance);
             addItemToDbTimeline(msg.data);
             break;
         case 'download':

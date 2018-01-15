@@ -14,7 +14,7 @@ Clone the repo and install neut-dump as extension. Supported browsers:
 ## Operations
 
 To get the data stored in the database, open extension UI and click download.
-It will download the database in JSON format.
+It will download the database in JSON format under the name 'neut-dump-timeseries.json'.
 
 To clear database, click Clear.
 
@@ -26,7 +26,7 @@ Each entry represents recorded event on the timeline:
 
 * type: see Tracked events
 
-* windowId, tabId: browser identifiers
+* windowId, tabId: IDs used by browser
 
 * location: location (URL) data
 
