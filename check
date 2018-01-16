@@ -1,5 +1,5 @@
 #!/bin/bash
 
-jsLint content_script.js
-jsLint background_page.js
-jsLint popup.js
+jsLint src/content_script.js
+jsLint src/background_page.js
+jsLint src/popup.js
