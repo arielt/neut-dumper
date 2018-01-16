@@ -24,6 +24,7 @@ function reportTimelineEvent(type) {
 
 function bufferFull() {
     reportTimelineEvent("bufferFull");
+    performance.clearResourceTimings();
 }
 
 if (window.performance && performance.timing && chrome.runtime) {
