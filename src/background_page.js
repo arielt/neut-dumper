@@ -92,3 +92,33 @@ chrome.runtime.onMessage.addListener(
     }
 );
 /*jslint unparam: false*/
+
+function injectTimingHeader(details) {
+    var flag = false,
+        rule = {
+            "name": "Timing-Allow-Origin",
+            "value": "*"
+        },
+        i;
+
+    for (i = 0; i < details.responseHeaders.length; i += 1) {
+        if (details.responseHeaders[i].name.toLowerCase() === rule.name.toLowerCase()) {
+            flag = true;
+            details.responseHeaders[i].value = rule.value;
+            break;
+        }
+    }
+
+    if (!flag) {
+        details.responseHeaders.push(rule);
+    }
+
+    return {responseHeaders: details.responseHeaders};
+}
+
+// add web requests listeners
+chrome.webRequest.onHeadersReceived.addListener(
+    injectTimingHeader,
+    {urls: ["<all_urls>"]},
+    ["responseHeaders"]
+);

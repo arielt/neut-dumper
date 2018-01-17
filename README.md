@@ -20,6 +20,8 @@ It will download the database in JSON format under the name 'neut-dump-timeserie
 
 To clear database, click Clear.
 
+To allow collection of attributes retrieved via Resource Timing API,
+this extension injects Timing-Allow-Origin:* into every received HTTP header.
 
 ## Collected data
 
