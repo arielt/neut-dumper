@@ -130,8 +130,6 @@ function injectTimingHeader(details) {
         details.responseHeaders.push(rule);
     }
 
-    details.customHeader = 'huiamba';
-
     return {responseHeaders: details.responseHeaders};
 }
 

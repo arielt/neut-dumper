@@ -29,7 +29,7 @@ this extension injects Timing-Allow-Origin:* into every received HTTP header.
 
 ## Collected data
 
-Each entry represents recorded event:
+Each resource timing entry represents recorded event:
 
 * ts: unique timestamp
 
@@ -40,6 +40,12 @@ Each entry represents recorded event:
 * location: location(URL) data
 
 * performance: snapshot of page performance metrics (https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry)
+
+Each request response data:
+
+* type: request or response
+
+* transferSize: populated in response only from content-length header
 
 
 ## Tracked events
