@@ -16,7 +16,11 @@ Clone the repo and install neut-dump as extension. Supported browsers:
 ## Operations
 
 To get the data stored in the database, open extension UI and click download.
-It will download the database in JSON format under the name 'neut-dump-timeseries.json'.
+It will download the database in JSON format:
+
+* neut-dump-timing.json: resource timing data
+
+* neut-dump-req.json: web request / response data
 
 To clear database, click Clear.
 
@@ -57,5 +61,10 @@ Detected
 
 ## Database structure
 
-All data is stored in single database 'neut-dump'. Time series data is going into
-'timeline' object store.
+All data is stored in single database 'neut-dump'.
+
+Object stores:
+
+* timing: resource timing data
+
+* req: web request / responses
