@@ -73,9 +73,17 @@ There are 2 key/value stores with a timestamp key, sorted by the key.
 
 * timing: resource timing data
   * key: ts, Unix timestamp
-  * value: event + page's performance metrics (https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry)
+  * value:
+    + type: event type
+    + location: URL data
+    + performance: page's performance metrics (https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry)
+    + tabId
+    + windowId
 
 
 * req: web request / responses
   * key: timestamp, Unix timestamp
-  * value: web request or response (https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/webRequest)
+  * value:
+    + web request or response (https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/webRequest)
+    + type: request or response
+    + transferSize (content-length) in response
