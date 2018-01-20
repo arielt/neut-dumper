@@ -67,10 +67,15 @@ Detected
 
 ## Database structure
 
-All data is stored in single database 'neut-dump'.
+All data is stored in IndexedDB database 'neut-dump'.
 
-Object stores:
+There are 2 key/value stores with a timestamp key, sorted by the key.
 
 * timing: resource timing data
+  * key: ts, Unix timestamp
+  * value: event + page's performance metrics (https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry)
+
 
 * req: web request / responses
+  * key: timestamp, Unix timestamp
+  * value: web request or response (https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/webRequest)
