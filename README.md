@@ -75,7 +75,7 @@ There are 2 key/value stores with a timestamp key, sorted by the key.
   * key: ts, Unix timestamp
   * value:
     + type: event type
-    + location: URL data
+    + location: URL data (https://developer.mozilla.org/en-US/docs/Web/API/Location)
     + performance: page's performance metrics (https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry)
     + tabId
     + windowId
@@ -86,4 +86,4 @@ There are 2 key/value stores with a timestamp key, sorted by the key.
   * value:
     + web request or response (https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/webRequest)
     + type: request or response
-    + transferSize (content-length) in response
+    + transferSize: response size, as specified in Content-Length (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length)
