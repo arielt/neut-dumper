@@ -7,7 +7,11 @@ var DB_NAME = 'neut-dumper';
 var TIMING_STORE = 'timing';
 var REQ_STORE = 'req';
 
+// IndexedDB database
 var db;
+
+// in-memory map of outstanding requests
+var outstandingRequests = {};
 
 // open database
 var openRequest = indexedDB.open(DB_NAME, 1);
@@ -19,7 +23,7 @@ openRequest.onsuccess = function (event) {
     db = event.target.result;
 };
 openRequest.onupgradeneeded = function (event) {
-    var db = event.target.result;
+    db = event.target.result;
 
     console.log("running database upgrade");
 
@@ -137,11 +141,16 @@ function injectTimingHeader(details) {
 function logWebRequest(details) {
     details.type = 'request';
     putToStore(REQ_STORE, details);
+
+    // add to the map of outstanding requests
+    outstandingRequests[details.requestId] = details;
 }
 
 // log web response
 function logWebResponse(details) {
     var fileSize, i;
+
+    // detect size
     for (i = 0; i < details.responseHeaders.length; i += 1) {
         if (details.responseHeaders[i].name.toLowerCase() === 'content-length') {
             fileSize = details.responseHeaders[i].value;
@@ -150,6 +159,13 @@ function logWebResponse(details) {
     }
     details.type = 'response';
     details.transferSize = fileSize;
+
+    // calculate duration
+    if (outstandingRequests.hasOwnProperty(details.requestId)) {
+        details.duration = (details.timeStamp - outstandingRequests[details.requestId].timeStamp).toFixed(2);
+        delete outstandingRequests[details.requestId];
+    }
+
     delete details.responseHeaders;
     putToStore(REQ_STORE, details);
 }
